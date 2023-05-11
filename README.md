@@ -24,39 +24,47 @@ Run the script with the desired command and arguments to perform specific action
   
     python main.py [command] [options]
 
-# Commands
+### Commands
 The script supports the following commands:
 vpc: Create a new VPC.
 igw: Create a new Internet Gateway.
 attach: Attach an existing IGW to an existing VPC.
 
-## Options
+### Options
 The script accepts the following options:
 
---vpc_name: Name of the VPC (required for the vpc command).
---igw_name: Name of the Internet Gateway (required for the igw command).
---vpc_id: ID of the VPC (required for the attach command).
---igw_id: ID of the Internet Gateway (required for the attach command).
+- --vpc_name: Name of the VPC (required for the vpc command).
+- --igw_name: Name of the Internet Gateway (required for the igw command).
+- --vpc_id: ID of the VPC (required for the attach command).
+- --igw_id: ID of the Internet Gateway (required for the attach command).
 
 ## Examples
-# Create a VPC
+### Create a VPC
 To create a new VPC, use the vpc command along with the --vpc_name option:
 
     python main.py vpc --vpc_name my-vpc
 
 This will create a new VPC with the specified name.
 
-# Create an Internet Gateway
+### Create an Internet Gateway
 To create a new Internet Gateway, use the igw command along with the --igw_name option:
 
     python main.py igw --igw_name my-igw
 This will create a new Internet Gateway with the specified name.
 
-# Attach an Internet Gateway to a VPC
+### Attach an Internet Gateway to a VPC
 To attach an existing Internet Gateway to an existing VPC, use the attach command along with the --vpc_id and --igw_id options:
 
     python main.py attach --vpc_id vpc-12345678 --igw_id igw-12345678
 This will attach the specified Internet Gateway to the specified VPC.
+
+## AWS Credentials
+This tool uses AWS credentials to interact with the AWS EC2 service. By default, it uses environment variables to retrieve the credentials. Ensure that the following environment variables are set:
+
+- aws_access_key_id: AWS access key ID.
+- aws_secret_access_key: AWS secret access key.
+- aws_session_token (optional): AWS session token (if using temporary credentials).
+- aws_region_name: AWS region where the VPC and IGW should be created.
 
 ## License
 This script is licensed under the MIT License.
