@@ -1,6 +1,7 @@
 import argparse
 import boto3
 from botocore.exceptions import ClientError
+from auth import get_ec2_client
 
 
 def create_vpc(client, name):
@@ -43,20 +44,21 @@ def main():
     parser.add_argument('--igw_name', type=str)
     parser.add_argument('--vpc_id', type=str)
     parser.add_argument('--igw_id', type=str)
+
     args = parser.parse_args()
 
-    ec2 = boto3.resource('ec2')
+    ec2_client = get_ec2_client()
 
     if args.cmd == 'vpc':
-        vpc = create_vpc(ec2, args.vpc_name)
+        vpc = create_vpc(ec2_client, args.vpc_name)
         if vpc is not None:
             print(f"Created VPC: {vpc.id}, {vpc.name}")
     elif args.cmd == 'igw':
-        igw = create_igw(ec2, args.igw_name)
+        igw = create_igw(ec2_client, args.igw_name)
         if igw is not None:
             print(f"Created IGW: {igw.id}, {igw.name}")
     elif args.cmd == 'attach':
-        if attach_igw_to_vpc(ec2, args.igw_id, args.vpc_id):
+        if attach_igw_to_vpc(ec2_client, args.igw_id, args.vpc_id):
             print("Successfully attached")
 
 
