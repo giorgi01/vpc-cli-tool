@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "vpc-cli-tool"
+version = "0.1.0"
+description = ""
+authors = ["Giorgi Tamarashvili <giorgi.tamarashvili.1@btu.edu.ge>"]
+readme = "README.md"
+packages = [{include = "vpc_cli_tool"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+boto3 = "^1.26.132"
+botocore = "^1.29.132"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
